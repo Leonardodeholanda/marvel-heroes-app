@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link as RouterLink } from "react-router-dom" 
 
 export const Header = styled.div`
     background-color: #0b0a08;
@@ -65,13 +66,16 @@ export const CardContent = styled.div`
     margin-top: 20px;
     background-color: #0b0a08;
 `
-export const ListButton = styled.a`
+export const Link = styled(RouterLink)`
     background-color: #fff;
     width: 300px;
     height: 35px;
     border-radius: 15px;
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 5px;
     color: #d4171d;
     border: none;
     cursor: pointer;
