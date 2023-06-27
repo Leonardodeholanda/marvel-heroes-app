@@ -1,44 +1,40 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { Header, SearchContent, Input, Button, CardContent, Link} from "./styles"
+import { Header, SearchContent, Input, Button, Link } from "./styles"
 
 function SearchBar() {
-    const [url, setUrl] = useState(`https://gateway.marvel.com/v1/public/characters?ts=1&apikey=295dc6d389bb325d6727ee9654004a4a&hash=93f389f43c44298fb01e9c0fbb6cb6a1`)
-    const [item, setItem] = useState<never[]>([])
+    const [url] = useState(`https://gateway.marvel.com/v1/public/characters?ts=1&apikey=295dc6d389bb325d6727ee9654004a4a&hash=93f389f43c44298fb01e9c0fbb6cb6a1`)
+    const [item, setItem] = useState([])
     const [search, setSearch] = useState("")
-    const [showCardContent, setShowCardContent] = useState(false)
     const navigate = useNavigate()
-    useEffect(() => {
-        const fetchData = async() => {
-           try { const response = await axios.get(url)
+    const searchMarvel = async (e: any) => {
+        e.preventDefault()
+        try {
+            const response = await axios.get(`${url}&name=${search}`)
             setItem(response.data.data.results)
+            if (response.data.data.results.length > 0) {
+                navigate(`/heroes/${response.data.data.results[0].id}`)
+            } else {
+                alert(`There's no ${search}, try again`)
+            }
         } catch (error) {
             console.log("Error fetching data from API:", error)
             setItem([])
         }
-        }
-        fetchData()
-    }, [url])
+    }
 
-    const searchMarvel = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setUrl(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${search}&ts=1&apikey=295dc6d389bb325d6727ee9654004a4a&hash=93f389f43c44298fb01e9c0fbb6cb6a1`)
-    }
-    const handleLinkClick = () => {
-        setShowCardContent(true)
-        navigate(`/heroeslist?search=${search}`)
-    }
     return (
         <>
             <Header>
                 <SearchContent>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/800px-Marvel_Logo.svg.png" alt="" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/800px-Marvel_Logo.svg.png" alt="marvel-logo" />
                     <form>
-                    <Input type="search" placeholder="Search Here" onChange={(e)=>setSearch(e.target.value)}/>
-                    <Button type="submit" onClick={searchMarvel}>Search</Button>
+                        <Input type="search" placeholder="Search Here"
+                            value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <Button type="submit" onClick={searchMarvel}>Search</Button>
                     </form>
-                    <Link to={`/heroes`} onClick={handleLinkClick}>
+                    <Link to={`/heroes`}>
                         All Heroes
                     </Link>
                 </SearchContent>

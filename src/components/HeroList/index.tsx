@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { AllHeroes, TitleContent, HeroCard, Loading, BackButton } from "./styles"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function HeroList() {
     const [heroes, setHeroes] = useState([])
@@ -22,20 +22,22 @@ function HeroList() {
     return (
         <>
             {heroes.length === 0 ? (
-                <Loading>Loading...</Loading>
+                <Loading>
+                    <img className="LoadingImage" src="../../assets/marvel-wallpaper.png" alt="marvel-logo"/>
+                    </Loading>
             ) : (
                 <>
-                <BackButton to="/">Back to Search</BackButton>
                 <AllHeroes>
+                <BackButton to="/"><img src="../../assets/back-arrow.png" alt="back-button"/></BackButton>
                     {heroes.map((item: any) => (
                         <HeroCard key={item.id}>
-                            <img src={item.thumbnail.path + "." + item.thumbnail.extension} onClick={() => navigate(`/${item.id}`)} alt={item.name} />
+                            <Link to={`/heroes/${item.id}`}><img src={item.thumbnail.path + "." + item.thumbnail.extension} onClick={() => navigate(`/heroes/${item.id}`)} alt={item.name} /></Link>
                             <TitleContent>
                                 <h3>{item.name}</h3>
                             </TitleContent>
                         </HeroCard>
             )
-                )}
+            )}
                 </AllHeroes>
                 </>
                 )}
