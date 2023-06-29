@@ -8,6 +8,25 @@ export const AllHeroes = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    overflow-x: hidden;
+
+    @media (max-width: 1600px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    @media (max-width: 1300px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    @media (max-width: 1000px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 400px) {
+        grid-template-columns: 1fr 1fr;
+    }
 `
 export const Loading = styled.div`  
     width: 100%;
@@ -85,5 +104,40 @@ export const BackButton = styled(Link)`
     }
     img {
         height: 150px;
+    }
+`
+export const LoadingMore = styled.button`
+    margin: auto;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    background-color: transparent;
+    border: 3px solid #fff;
+    transition: all .1s ease-in-out;
+    border-radius: 15px;
+    cursor: pointer;
+    i {
+        display: none;
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+    &:hover {
+        opacity: 0.7;
+        box-shadow: 0 0 10px 0 #fff inset, 0 0 20px 2px #fff;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        i {
+            display: block;
+            font-size: 50px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        p {
+            display: none;
+        }
+    }
+    &:active {
+        opacity: 0.9;
     }
 `

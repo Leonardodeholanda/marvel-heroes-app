@@ -25,6 +25,12 @@ export const SearchContent = styled.div`
     img {
         width: 300px;
     }
+    p {
+        color: #000;
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
 `
 export const Input = styled.input`
     outline: none;

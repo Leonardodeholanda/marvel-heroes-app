@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Container, CardDetails, MainInfo, HeroInfo, ExtraInfo, Close, Loading } from "./styles"
@@ -7,6 +7,7 @@ import { Hero } from "../../interface"
 function HeroDetails() {
   const { id } = useParams()
   const [item, setItem] = useState<Hero | null>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +28,10 @@ function HeroDetails() {
   }
   const { thumbnail, name, description, comics, series, events } = item
 
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+
   return (
     <>
     <Container>
@@ -37,7 +42,7 @@ function HeroDetails() {
             <h2>{name}</h2>
             <p>{description}</p>
           </HeroInfo>
-          <Close to="/heroes"><p>X</p></Close>
+          <Close onClick={handleGoBack}><p>X</p></Close>
         </MainInfo>
         <ExtraInfo>
           <p>Comics: {comics.available}</p>

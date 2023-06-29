@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
 
 export const Loading = styled.div`  
     width: 100%;
@@ -90,19 +89,19 @@ export const HeroInfo = styled.div`
         border-radius: 20px;
     }
 `
-export const Close = styled(Link)`
-        text-decoration: none;
-    p {
+export const Close = styled.button`
+        background: transparent;
+        align-self: baseline;
         font-size: 30px;
         color: #fff;
         border-radius: 50%;
         padding: 10px;
+        cursor: pointer;
         &:hover {
             background-color: rgba(81, 3, 3, 0.6);
         }
         &:active {
            background-color: rgba(81, 3, 3, 0.8);
-        }
         }
 `
 export const ExtraInfo = styled.div`
